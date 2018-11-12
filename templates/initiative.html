@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Dice Roller</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="../static/signup.css" rel="stylesheet">
+    <link href="../static/app.css" rel="stylesheet">
+    <script type="text/javascript" src="../static/app.js"></script>
+</head>
+
+<body>
+
+<div class="container ">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+            <div class="card" style="width: 18rem;">
+                <div class="list-group list-group-flush">
+                    {% for actor in init.get_actors() %}
+                    {% if actor.name == init.current_actor().name %}
+                    <a href="/init/delay?name={{actor.name}}&value=4" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action list-group-item-primary">
+                    {% elif actor.has_turn %}
+                    <a href="/init/delay?name={{actor.name}}&value=4" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action list-group-item-success">
+                    {% else %}
+                    <a href="/init/delay?name={{actor.name}}&value=4" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action list-group-item-secondary">
+                    {% endif %}
+                        {{actor.name}}
+                        <span class="badge badge-primary badge-pill">{{actor.initiative}}</span>
+
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="card" style="width: 18rem; height: 9rem;">
+              <div class="card-body">
+                <h5 class="card-title">{{init.counter}}</h5>
+                <p class="card-text">{{init.current_actor().name}}</p>
+
+                <a href="/init/next" class="btn btn-primary">Next</a>
+              </div>
+            </div>
+         </div>
+      </div>
+    </div>
+    <footer class="footer">
+        <p>&copy; Mantygrock 2018</p>
+    </footer>
+
+</div>
+</body>
+
+</html>
