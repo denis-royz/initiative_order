@@ -1,9 +1,15 @@
 from flask import Flask, render_template
 from flask import request
 from service.InitiativeService import InitiativeService
-app = Flask(__name__)
+from envparse import Env
 
+app = Flask(__name__)
 init = InitiativeService()
+env = Env(
+    INITIATIVE_PARSER_HOST=dict(cast=str,  default='0.0.0.0'),
+    INITIATIVE_PARSER_PORT=dict(cast=int,  default='5000')
+)
+env.read_envfile()
 
 
 @app.route('/')
@@ -39,4 +45,6 @@ def initiative_delay():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    print('INITIATIVE_PARSER_HOST =', env.str('INITIATIVE_PARSER_HOST'))
+    print('INITIATIVE_PARSER_PORT =', env.int('INITIATIVE_PARSER_PORT'))
+    app.run(host=env.str('INITIATIVE_PARSER_HOST'), port=env.int('INITIATIVE_PARSER_PORT'))
