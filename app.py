@@ -35,6 +35,15 @@ def initiative_next():
     return render_template('initiative.html', init=holder)
 
 
+@app.route('/init/add')
+def initiative_add():
+    name = request.args.get('name')
+    value = request.args.get('value')
+    holder = init.get_session_holder()
+    holder.add_actor(name, int(value))
+    return render_template('initiative.html', init=holder)
+
+
 @app.route('/init/delay')
 def initiative_delay():
     name = request.args.get('name')
