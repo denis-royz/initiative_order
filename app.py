@@ -28,23 +28,23 @@ def initiative():
     return render_template('initiative.html', init=holder)
 
 
-@app.route('/init/next')
+@app.route('/actors/end_of_turn')
 def initiative_next():
     holder = init.get_session_holder()
     holder.step()
-    return render_template('initiative.html', init=holder)
+    return render_template('actors.html', init=holder)
 
 
-@app.route('/init/add')
+@app.route('/actors/new')
 def initiative_add():
     name = request.args.get('name')
     value = request.args.get('value')
     holder = init.get_session_holder()
     holder.add_actor(name, int(value))
-    return render_template('initiative.html', init=holder)
+    return render_template('actors.html', init=holder)
 
 
-@app.route('/init/delay')
+@app.route('/actors/delay')
 def initiative_delay():
     name = request.args.get('name')
     value = request.args.get('value')
