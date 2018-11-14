@@ -15,7 +15,18 @@ env.read_envfile()
 @app.route('/')
 @app.route('/main')
 def root():
-    return render_template('index.html')
+    holder = init.get_session_holder()
+    return render_template('initiative.html', init=holder)
+
+
+@app.route('/main/init')
+def initiative():
+    holder = init.get_session_holder()
+    holder.clear()
+    holder.add_actor("Wu kong", 12)
+    holder.add_actor("Lee Sin", 10)
+    holder.add_actor("Vi", 8)
+    return render_template('initiative.html', init=holder)
 
 
 @app.route('/init')
