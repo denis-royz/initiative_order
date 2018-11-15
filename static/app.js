@@ -16,7 +16,7 @@ String.prototype.format = function() {
 };
 
 function callNext() {
-    $.get( "actors/end_of_turn", function( data ) {
+    $.get( "/api/v1/actors/end_of_turn", function( data ) {
          //As soon as the browser finished downloading, this function is called.
          $('#actors').html(data);
     });
@@ -26,7 +26,7 @@ function callNext() {
 function newChampion() {
     let name = document.getElementById("input_new_champion_name").value;
     let value = document.getElementById("input_new_champion_init").value;
-    $.get( "actors/new?name={0}&value={1}".format(name, value), function( data ) {
+    $.get( "/api/v1/actors/new?name={0}&value={1}".format(name, value), function( data ) {
          //As soon as the browser finished downloading, this function is called.
          $('#actors').html(data);
 

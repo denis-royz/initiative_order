@@ -13,40 +13,29 @@ env.read_envfile()
 
 
 @app.route('/')
-@app.route('/main')
 def root():
     holder = init.get_session_holder()
     return render_template('initiative.html', init=holder)
 
 
-@app.route('/main/init')
+@app.route('/api/v1/init')
 def initiative():
     holder = init.get_session_holder()
     holder.clear()
     holder.add_actor("Wu kong", 12)
     holder.add_actor("Lee Sin", 10)
     holder.add_actor("Vi", 8)
-    return render_template('initiative.html', init=holder)
+    return render_template('actors.html', init=holder)
 
 
-@app.route('/init')
-def initiative():
-    holder = init.get_session_holder()
-    holder.clear()
-    holder.add_actor("Wu kong", 12)
-    holder.add_actor("Lee Sin", 10)
-    holder.add_actor("Vi", 8)
-    return render_template('initiative.html', init=holder)
-
-
-@app.route('/actors/end_of_turn')
+@app.route('/api/v1/actors/end_of_turn')
 def initiative_next():
     holder = init.get_session_holder()
     holder.step()
     return render_template('actors.html', init=holder)
 
 
-@app.route('/actors/new')
+@app.route('/api/v1/actors/new')
 def initiative_add():
     name = request.args.get('name')
     value = request.args.get('value')
@@ -55,7 +44,7 @@ def initiative_add():
     return render_template('actors.html', init=holder)
 
 
-@app.route('/actors/delay')
+@app.route('/api/v1/delay')
 def initiative_delay():
     name = request.args.get('name')
     value = request.args.get('value')
