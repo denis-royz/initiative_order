@@ -8,3 +8,6 @@ class InitiativeService:
     def get_session_holder(self):
         return self.holder
 
+    def reset(self):
+        self.holder = InitiativeHolder()
+

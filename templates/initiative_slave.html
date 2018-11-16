@@ -1,4 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Dice Roller</title>
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="../static/signup.css" rel="stylesheet">
+    <link href="../static/app.css" rel="stylesheet">
+    <script type="text/javascript" src="../static/app.js"></script>
+    <meta http-equiv="refresh" content="5;">
+</head>
+
+<body>
+
+<div class="container ">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+            <div class="card" id="actors" style="width: 18rem;">
                 <div class="list-group list-group-flush">
                     {% for actor in init.get_actors() %}
                     {% if actor.name == init.current_actor().name %}
@@ -17,3 +37,23 @@
                     </button >
                     {% endfor %}
                 </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="card" style="width: 18rem; height: 9rem;">
+              <div class="card-body">
+                <h5 class="card-title">Refresh</h5>
+                <button onclick="window.location.reload(1)" class="btn btn-primary">Refresh</button >
+              </div>
+            </div>
+         </div>
+      </div>
+    </div>
+    <footer class="footer">
+        <p>&copy; Mantygrock 2018</p>
+    </footer>
+
+</div>
+</body>
+
+</html>

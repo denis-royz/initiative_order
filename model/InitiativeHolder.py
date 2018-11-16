@@ -34,12 +34,18 @@ class InitiativeHolder(object):
         self.current = next_actor
         self.actors.sort()
 
-    def delay_actor(self, name, value):
+    def set_init_to_actor(self, actor_id, value):
         for actor in self.actors:
-            if actor.name == name:
-                actor.append_initiative(-value)
+            if str(actor.id) == actor_id:
+                actor.set_initiative(value)
                 self.actors.sort()
                 return True
+        return False
+
+    def delete_actor(self, actor_id):
+        for actor in self.actors:
+            if str(actor.id) == actor_id:
+                self.actors.remove(actor)
         return False
 
     def get_actors(self):

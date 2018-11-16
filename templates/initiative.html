@@ -21,26 +21,40 @@
                 <div class="list-group list-group-flush">
                     {% for actor in init.get_actors() %}
                     {% if actor.name == init.current_actor().name %}
-                    <a href="/api/v1/delay?name={{actor.name}}&value=4" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action list-group-item-primary">
+                    <!--suppress XmlDuplicatedId -->
+                    <button id="btn-select-champion-{{actor.id}}" value="{{actor.name}}" onclick="selectChampion('{{actor.id}}')" type="button" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action list-group-item-primary">
                     {% elif actor.has_turn %}
-                    <a href="/api/v1/delay?name={{actor.name}}&value=4" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action list-group-item-success">
+                    <!--suppress XmlDuplicatedId -->
+                    <button id="btn-select-champion-{{actor.id}}" value="{{actor.name}}" onclick="selectChampion('{{actor.id}}')" type="button" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action list-group-item-success">
                     {% else %}
-                    <a href="/api/v1/delay?name={{actor.name}}&value=4" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action list-group-item-secondary">
+                    <!--suppress XmlDuplicatedId -->
+                    <button id="btn-select-champion-{{actor.id}}" value="{{actor.name}}" onclick="selectChampion('{{actor.id}}')" type="button" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action list-group-item-secondary">
                     {% endif %}
                         {{actor.name}}
                         <span class="badge badge-primary badge-pill">{{actor.initiative}}</span>
 
-                    </a>
+                    </button >
                     {% endfor %}
                 </div>
             </div>
         </div>
         <div class="col-sm">
-            <div class="card" style="width: 18rem; height: 9rem;">
+            <div class="card" style="width: 18rem;">
               <div class="card-body">
-                <h5 class="card-title">{{init.counter}}</h5>
-                <p class="card-text">{{init.current_actor().name}}</p>
+                <h5 class="card-title">Finish current actors turn</h5>
                 <button onclick="callNext()" class="btn btn-primary">Next</button >
+              </div>
+            </div>
+         </div>
+        <div class="col-sm">
+            <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <h5 id="selected-actor" class="card-title">No actor selected</h5>
+                <div class="input-group mb-3">
+                  <input type="number"  id="input_selected_champion_initiative" class="form-control" placeholder="Champion initiative" aria-label="Champion initiative" aria-describedby="basic-addon2">
+                </div>
+                <button onclick="callDelete()" class="btn btn-danger">Delete</button >
+                <button onclick="updateSelectedActorsInitiative()" class="btn btn-primary">Set initiative</button >
               </div>
             </div>
          </div>
@@ -52,11 +66,22 @@
                   <input type="text"  id="input_new_champion_name" class="form-control" placeholder="Champion name" aria-label="Champion name" aria-describedby="basic-addon2">
                 </div>
                 <div class="input-group mb-3" >
-                  <input type="text" id="input_new_champion_init" class="form-control" placeholder="Starting initiative" aria-label="Champion name" aria-describedby="basic-addon2">
+                  <input type="number" id="input_new_champion_init" class="form-control" placeholder="Starting initiative" aria-label="Champion name" aria-describedby="basic-addon2">
                 </div>
-
                 <button onclick="newChampion()" class="btn btn-primary">Create</button >
               </div>
+            </div>
+         </div>
+        <div class="col-sm">
+            <div class="card" style="width: 18rem; height: 9rem;">
+              <div class="card-body">
+                <h5 class="card-title">Reset</h5>
+                <button onclick="resetEverything()" class="btn btn-primary">Reset</button >
+              </div>
+            </div>
+         </div>
+        <div class="col-sm">
+            <div class="card" style="width: 18rem; height: 9rem;">
             </div>
          </div>
       </div>

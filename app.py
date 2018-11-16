@@ -18,6 +18,19 @@ def root():
     return render_template('initiative.html', init=holder)
 
 
+@app.route('/slave')
+def slave():
+    holder = init.get_session_holder()
+    return render_template('initiative_slave.html', init=holder)
+
+
+@app.route('/api/v1/reset')
+def reset():
+    init.reset()
+    holder = init.get_session_holder()
+    return render_template('actors.html', init=holder)
+
+
 @app.route('/api/v1/init')
 def initiative():
     holder = init.get_session_holder()
@@ -44,13 +57,21 @@ def initiative_add():
     return render_template('actors.html', init=holder)
 
 
-@app.route('/api/v1/delay')
+@app.route('/api/v1/set_init')
 def initiative_delay():
-    name = request.args.get('name')
+    actor_id = request.args.get('actor_id')
     value = request.args.get('value')
     holder = init.get_session_holder()
-    holder.delay_actor(name, int(value))
-    return render_template('initiative.html', init=holder)
+    holder.set_init_to_actor(actor_id, int(value))
+    return render_template('actors.html', init=holder)
+
+
+@app.route('/api/v1/delete')
+def delete_actor():
+    actor_id = request.args.get('actor_id')
+    holder = init.get_session_holder()
+    holder.delete_actor(actor_id)
+    return render_template('actors.html', init=holder)
 
 
 if __name__ == '__main__':
