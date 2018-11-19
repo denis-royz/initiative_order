@@ -10,6 +10,7 @@ class InitiativeHolder(object):
 
     def add_actor(self, actor_name, base_init):
         self.actors.append(Actor(actor_name, base_init))
+        self.actors.sort()
 
     def next_actor(self):
         selected = None

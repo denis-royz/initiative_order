@@ -31,16 +31,6 @@ def reset():
     return render_template('actors.html', init=holder)
 
 
-@app.route('/api/v1/init')
-def initiative():
-    holder = init.get_session_holder()
-    holder.clear()
-    holder.add_actor("Wu kong", 12)
-    holder.add_actor("Lee Sin", 10)
-    holder.add_actor("Vi", 8)
-    return render_template('actors.html', init=holder)
-
-
 @app.route('/api/v1/actors/end_of_turn')
 def initiative_next():
     holder = init.get_session_holder()
@@ -78,3 +68,4 @@ if __name__ == '__main__':
     print('INITIATIVE_PARSER_HOST =', env.str('INITIATIVE_PARSER_HOST'))
     print('INITIATIVE_PARSER_PORT =', env.int('INITIATIVE_PARSER_PORT'))
     app.run(host=env.str('INITIATIVE_PARSER_HOST'), port=env.int('INITIATIVE_PARSER_PORT'))
+а
